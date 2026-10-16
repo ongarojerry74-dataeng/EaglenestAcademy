@@ -1,0 +1,267 @@
+/*
+ * custom.css – Eaglenest Academy
+ * Global base styles, typography, animations, and utility helpers.
+ * Loaded after the Tailwind CDN so these rules can safely extend it.
+ */
+
+/* ── 1. Smooth scrolling & box-sizing reset ─────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── 2. Body defaults ───────────────────────────────────────────────────── */
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: #0F2A43;           /* --ink */
+  background-color: #ffffff;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── 3. Heading font ────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6,
+.font-heading {
+  font-family: 'Century Gothic', 'Questrial', sans-serif;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #0F2A43;
+}
+
+/* ── 4. Link defaults ───────────────────────────────────────────────────── */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #0EA5E9; /* sky-500 */
+}
+
+/* ── 5. Focus styles (accessible, brand-coloured ring) ─────────────────── */
+:focus-visible {
+  outline: 3px solid #22C55E; /* leaf-500 */
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Remove default outline only when :focus-visible is supported */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ── 6. Gradient helper ─────────────────────────────────────────────────── */
+/*
+ * .bg-brand-gradient – diagonal sky → leaf gradient used for hero sections,
+ * CTA banners, and accent strips.
+ */
+.bg-brand-gradient {
+  background: linear-gradient(135deg, #0EA5E9 0%, #22C55E 100%);
+}
+
+/* Subtle tint version (for cards / section backgrounds) */
+.bg-brand-gradient-soft {
+  background: linear-gradient(135deg, #E0F2FE 0%, #DCFCE7 100%);
+}
+
+/* ── 7. Scroll-reveal animation ─────────────────────────────────────────── */
+/*
+ * Elements start invisible and translated down.
+ * main.js adds the IntersectionObserver that toggles .is-visible.
+ */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered children – add .reveal-stagger to the parent */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: none; }
+.reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 0.15s; opacity: 1; transform: none; }
+.reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 0.25s; opacity: 1; transform: none; }
+.reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 0.35s; opacity: 1; transform: none; }
+.reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 0.45s; opacity: 1; transform: none; }
+.reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 0.55s; opacity: 1; transform: none; }
+
+/* ── 8. Active nav link ─────────────────────────────────────────────────── */
+.nav-link.active-link {
+  color: #22C55E; /* leaf-500 */
+  font-weight: 600;
+  border-bottom: 2px solid #22C55E;
+  padding-bottom: 2px;
+}
+
+/* Mobile drawer active link */
+.mobile-nav-link.active-link {
+  color: #22C55E;
+  font-weight: 600;
+}
+
+/* ── 9. Button helpers ──────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1.5rem;
+  border-radius: 9999px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background-color: #22C55E; /* leaf-500 */
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: #16A34A; /* leaf-600 */
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.35);
+}
+
+.btn-outline {
+  border: 2px solid #0EA5E9;
+  color: #0EA5E9;
+  background: transparent;
+}
+
+.btn-outline:hover {
+  background-color: #0EA5E9;
+  color: #ffffff;
+}
+
+/* ── 10. Card surface ───────────────────────────────────────────────────── */
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(15, 42, 67, 0.10);
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 40px rgba(15, 42, 67, 0.16);
+  transform: translateY(-3px);
+}
+
+/* ── 11. Section spacing ────────────────────────────────────────────────── */
+.section {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}
+
+/* ── 12. Stat counter number ────────────────────────────────────────────── */
+.stat-number {
+  font-family: 'Century Gothic', 'Questrial', sans-serif;
+  font-weight: 700;
+  font-size: 2.75rem;
+  color: #0EA5E9; /* sky-500 */
+  line-height: 1;
+}
+
+/* ── 13. Accordion ──────────────────────────────────────────────────────── */
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.3s ease;
+}
+
+.accordion-content.open {
+  max-height: 600px; /* large enough for any content block */
+}
+
+/* ── 14. Back-to-top button ─────────────────────────────────────────────── */
+#back-to-top {
+  position: fixed;
+  bottom: 5.5rem;   /* sits above the WhatsApp FAB */
+  right: 1.25rem;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #0EA5E9;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 50;
+  cursor: pointer;
+  border: none;
+}
+
+#back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#back-to-top:hover {
+  background-color: #0284C7;
+  transform: translateY(-2px);
+}
+
+/* ── 15. WhatsApp FAB ───────────────────────────────────────────────────── */
+#whatsapp-fab {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background-color: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  z-index: 50;
+  cursor: pointer;
+}
+
+#whatsapp-fab:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 24px rgba(37, 211, 102, 0.55);
+}
+
+/* ── 16. Hamburger icon lines ───────────────────────────────────────────── */
+.hamburger-line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: currentColor;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
